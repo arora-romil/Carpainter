@@ -28,20 +28,6 @@ class Getstarted extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 40),
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  return SizedBox(
-                    width: constraints.maxWidth * 0.8,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/create_account');
-                      },
-                      child: const Text('Create Account'),
-                    ),
-                  );
-                },
-              ),
               const SizedBox(height: 20),
               LayoutBuilder(
                 builder: (context, constraints) {

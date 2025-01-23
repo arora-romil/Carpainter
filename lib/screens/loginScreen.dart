@@ -1,3 +1,4 @@
+import 'package:carpainter/screens/homePage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,7 +10,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  String _phoneNumber = '';
+  String _phoneNumber = ''; // Removed unused variable
   String _otp = '';
   bool _isOtpSent = false;
   bool _isLoading = false;
@@ -28,7 +29,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _verifyOtp() {
-    if (_otp.isNotEmpty) {}
+    if (_otp.isNotEmpty) {
+      if (_otp == '123456') {
+        // Replace with your actual verification logic
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      }
+    }
   }
 
   @override
@@ -61,9 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   }
                   return null;
                 },
-                onChanged: (value) {
-                  _phoneNumber = value;
-                },
+                onChanged: (value) {}, // Removed unused onChanged callback
               ),
               const SizedBox(height: 20),
               if (_isOtpSent)
@@ -94,10 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: _isLoading
                       ? const CircularProgressIndicator()
-                      : const Text(
-                          'Send OTP',
-                          style: TextStyle(fontSize: 18),
-                        ),
+                      : (_isOtpSent
+                          ? const Text('Verify OTP')
+                          : const Text('Send OTP')),
                 ),
               ),
             ],
