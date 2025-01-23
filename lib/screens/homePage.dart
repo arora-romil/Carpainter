@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("LoginPage"),
+        title: Text(
+          "HomePage",
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
       ),
     );
