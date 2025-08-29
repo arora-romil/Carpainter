@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'user_model.dart';
+import 'user_data_source.dart';
+
+class DashboardScreen extends StatefulWidget {
+  @override
+  _DashboardScreenState createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  late Future<List<UserModel>> usersFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    usersFuture = fetchUsers();
+  }
+
+  Future<List<UserModel>> fetchUsers() async {
+    QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('users').get();
+    return snapshot.docs.map((doc) => UserModel.fromFirestore(doc)).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Admin Dashboard")),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(child: Text("Menu")),
+            ListTile(title: Text("Dashboard")),
+            ListTile(title: Text("Requests")),
+            ListTile(title: Text("Users")),
+          ],
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: FutureBuilder<List<UserModel>>(
+          future: usersFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text("Error: ${snapshot.error}"));
+            } else {
+              return SfDataGrid(
+                source: UserDataSource(snapshot.data!),
+                columns: [
+                  GridColumn(columnName: 'firstName', label: Text('First Name')),
+                  GridColumn(columnName: 'lastName', label: Text('Last Name')),
+                  GridColumn(columnName: 'mobile', label: Text('Mobile')),
+                  GridColumn(columnName: 'whatsapp', label: Text('WhatsApp')),
+                  GridColumn(columnName: 'aadhaar', label: Text('Aadhaar')),
+                  GridColumn(columnName: 'role', label: Text('Role')),
+                  GridColumn(columnName: 'points', label: Text('Points')),
+                  GridColumn(columnName: 'pointsRedeemed', label: Text('Points Redeemed')),
+                  GridColumn(columnName: 'pincode', label: Text('Pincode')),
+                  GridColumn(columnName: 'state', label: Text('State')),
+                  GridColumn(columnName: 'district', label: Text('District')),
+                  GridColumn(columnName: 'city', label: Text('City')),
+                  GridColumn(columnName: 'address', label: Text('Address')),
+                  GridColumn(columnName: 'createdAt', label: Text('Created At')),
+                  GridColumn(columnName: 'isAdmin', label: Text('Admin')),
+                ],
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+}

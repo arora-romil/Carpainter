@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "staging": "woodcraft-d43fe",
+    "default": "woodcraft-d43fe"
+  },
+  "targets": {},
+  "etags": {}
+}

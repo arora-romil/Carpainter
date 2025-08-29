@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "169150414057",
+    "project_id": "woodcraft-d43fe",
+    "storage_bucket": "woodcraft-d43fe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169150414057:android:8dde3c65f7d872b7ea8478",
+        "android_client_info": {
+          "package_name": "com.example.carpainter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiNKoq3PV2_OdOTvFlOO2Pvkhmifvcl9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
